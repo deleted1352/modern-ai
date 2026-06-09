@@ -7,11 +7,7 @@ load_dotenv()
 NUM_RUNS_TIMES = 5
 
 # TODO: Fill this in!
-YOUR_SYSTEM_PROMPT = "" \
-"You are an agent that is assigned to reverse the letters of given words" \
-"Examples are shown below:" \
-"Input: strawberry Output: yrrebwarts" \
-"Input: pineapple Output: elppaenip"
+YOUR_SYSTEM_PROMPT = ""
 
 USER_PROMPT = """
 Reverse the order of letters in the following word. Only output the reversed word, no other text:
