@@ -7,6 +7,7 @@ load_dotenv()
 NUM_RUNS_TIMES = 5
 
 # TODO: Fill this in!
+<<<<<<< HEAD
 YOUR_SYSTEM_PROMPT = (
     "You are an exact string reversal function. Output ONLY the final reversed word. No chatter.\n\n"
     "Example 1:\n"
@@ -30,6 +31,9 @@ YOUR_SYSTEM_PROMPT = (
     "Reversed step-by-step: s -> u -> t -> a -> t -> s -> p -> t -> t -> h\n"
     "Output: sutatsptth"
 )
+=======
+YOUR_SYSTEM_PROMPT = ""
+>>>>>>> 3676885c8c867ceb12b35d1b370bf0045a674297
 
 USER_PROMPT = """
 Reverse the order of letters in the following word. Only output the reversed word, no other text:
