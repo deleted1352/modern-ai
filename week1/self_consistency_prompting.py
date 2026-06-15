@@ -9,7 +9,23 @@ load_dotenv()
 NUM_RUNS_TIMES = 5
 
 # TODO: Fill this in! Try to get as close to 100% correctness across all runs as possible.
-YOUR_SYSTEM_PROMPT = ""
+YOUR_SYSTEM_PROMPT = (
+    "You are a logical math tutor. Break down distance word problems into step-by-step math equations "
+    "by tracking the exact mileage location of each milestone from the starting point (mile 0).\n\n"
+    "Follow this structural thinking pattern:\n"
+    "Example:\n"
+    "Problem: Sarah went on a 100-mile road trip. She first stopped at mile 30. Her second stop was 10 miles "
+    "before the end of the trip. How many miles did she drive between her first and second stops?\n"
+    "Reasoning:\n"
+    "- Total distance = 100 miles\n"
+    "- Stop 1 position = 30 miles from start\n"
+    "- Stop 2 position = Total distance - miles before end = 100 - 10 = 90 miles from start\n"
+    "- Distance between stops = Stop 2 position - Stop 1 position = 90 - 30 = 60 miles\n"
+    "Answer: 60\n"
+    "Apply this exact checkpoint subtraction logic to the user's problem. Show your brief breakdown "
+    "steps. On the very last line of your response, you MUST output the final result exactly in this "
+    "format: 'Answer: <number>'."
+)
 
 USER_PROMPT = """
 Solve this problem, then give the final answer on the last line as "Answer: <number>".

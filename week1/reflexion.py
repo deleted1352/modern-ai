@@ -15,7 +15,15 @@ Keep the implementation minimal.
 """
 
 # TODO: Fill this in!
-YOUR_REFLEXION_PROMPT = ""
+YOUR_REFLEXION_PROMPT = (
+    "You are an elite code repair agent. Review the previous code implementation "
+    "and the list of unit test failures provided. Identify why the code failed and "
+    "rewrite the function `is_valid_password(password: str) -> bool` to fix all issues.\n\n"
+    "CRITICAL RULES:\n"
+    "1. The password must contain at least 1 uppercase, 1 lowercase, 1 digit, and 1 special character (!@#\$%^&*()-_).\n"
+    "2. Output ONLY a single fenced Python code block starting with ```python and ending with ```.\n"
+    "3. Do not include any explanations, prose, or introductory text."
+)
 
 
 # Ground-truth test suite used to evaluate generated code

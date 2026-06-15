@@ -7,11 +7,29 @@ load_dotenv()
 NUM_RUNS_TIMES = 5
 
 # TODO: Fill this in!
-YOUR_SYSTEM_PROMPT = "" \
-"You are an agent that is assigned to reverse the letters of given words" \
-"Examples are shown below:" \
-"Input: strawberry Output: yrrebwarts" \
-"Input: pineapple Output: elppaenip"
+YOUR_SYSTEM_PROMPT = (
+    "You are an exact string reversal function. Output ONLY the final reversed word. No chatter.\n\n"
+    "Example 1:\n"
+    "Input: cat\n"
+    "Step-by-step: c -> a -> t\n"
+    "Reversed step-by-step: t -> a -> c\n"
+    "Output: tac\n\n"
+    "Example 2:\n"
+    "Input: strawberry\n"
+    "Step-by-step: s -> t -> r -> a -> w -> b -> e -> r -> r -> y\n"
+    "Reversed step-by-step: y -> r -> r -> e -> b -> w -> a -> r -> t -> s\n"
+    "Output: yrrebwarts\n\n"
+    "Example 3:\n"
+    "Input: pineapple\n"
+    "Step-by-step: p -> i -> n -> e -> a -> p -> p -> l -> e\n"
+    "Reversed step-by-step: e -> l -> p -> p -> a -> e -> n -> i -> p\n"
+    "Output: elppaenip\n\n"
+    "Example 4:\n"
+    "Input: httpstatus\n"
+    "Step-by-step: h -> t -> t -> p -> s -> t -> a -> t -> u -> s\n"
+    "Reversed step-by-step: s -> u -> t -> a -> t -> s -> p -> t -> t -> h\n"
+    "Output: sutatsptth"
+)
 
 USER_PROMPT = """
 Reverse the order of letters in the following word. Only output the reversed word, no other text:
