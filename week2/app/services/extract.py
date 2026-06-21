@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-import os
+import json
 import re
 from typing import List
-import json
-from typing import Any
+
 from ollama import chat
 from dotenv import load_dotenv
 
@@ -87,3 +86,53 @@ def _looks_imperative(sentence: str) -> bool:
         "investigate",
     }
     return first.lower() in imperative_starters
+
+
+def extract_action_items_llm(text: str) -> List[str]:
+    """
+    Extracts action items from text using a local LLM via Ollama's chat API.
+    """
+    if not text.strip():
+        return []
+
+    # System prompt enforcing strict structured array format
+    system_prompt = (
+        "You are an expert assistant that extracts action items from meeting notes.\n"
+        "Analyze the provided notes and extract a clear list of actionable tasks.\n"
+        "Return ONLY a valid JSON list of strings (e.g., [\"Task 1\", \"Task 2\"]).\n"
+        "Do not include markdown blocks like ```json, headers, or any introductory/conversational text."
+    )
+
+    try:
+        # Use the chat method matching your existing import statement
+        response = chat(
+            model="llama3",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": f"Notes:\n{text}"}
+            ]
+        )
+        
+        # Access content via message dictionary fields
+        if hasattr(response, 'message'):
+            response_text = response.message.content.strip()
+        else:
+            response_text = response.get("message", {}).get("content", "").strip()
+        
+        # Strip common markdown blocks if the LLM slips up
+        if response_text.startswith("```"):
+            response_text = response_text.split("\n", 1)[-1].rsplit("```", 1)[0].strip()
+            if response_text.startswith("json"):
+                response_text = response_text.split("\n", 1)[-1].strip()
+
+        # Safely parse the structural JSON array response
+        extracted = json.loads(response_text)
+        if isinstance(extracted, list):
+            return [str(item).strip() for item in extracted if str(item).strip()]
+        
+        return []
+
+    except Exception as e:
+        # Fallback logging error safely to user interface
+        print(f"Ollama integration error: {e}")
+        return ["Error: Could not extract items via LLM. Ensure Ollama is running."]
